@@ -1,2 +1,5 @@
 node_modules/
 .DS_Store
+/.tools/
+/m2-species/.build/
+/m2-species/rust/target/

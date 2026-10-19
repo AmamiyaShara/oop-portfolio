@@ -1,0 +1,266 @@
+:root {
+  color-scheme: dark;
+  font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  background: #101311;
+  color: #eee9dd;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#stage {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  background: #101311;
+}
+
+canvas {
+  display: block;
+  touch-action: none;
+}
+
+.sun-visual {
+  position: fixed;
+  top: clamp(110px, 17vh, 170px);
+  right: clamp(44px, 13vw, 180px);
+  z-index: 1;
+  width: clamp(54px, 7vw, 92px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #f2da7b;
+  box-shadow: 0 0 34px rgba(242, 218, 123, 0.48);
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.65);
+  transition: opacity 160ms linear, transform 160ms linear;
+}
+
+.sun-visual::before,
+.sun-visual::after {
+  content: "";
+  position: absolute;
+  inset: -26%;
+  border: 1px solid rgba(246, 224, 139, 0.48);
+  border-radius: 50%;
+}
+
+.sun-visual::after {
+  inset: -48%;
+  border-color: rgba(246, 224, 139, 0.22);
+}
+
+.title-block,
+.readout,
+.controls {
+  position: fixed;
+  z-index: 2;
+}
+
+.title-block {
+  top: clamp(20px, 4vw, 48px);
+  left: clamp(20px, 5vw, 72px);
+  pointer-events: none;
+}
+
+.title-block p {
+  margin: 0 0 8px;
+  color: #a9b0a7;
+  font-family: Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0;
+}
+
+.title-block h1 {
+  margin: 0;
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.readout {
+  top: clamp(22px, 4vw, 50px);
+  right: clamp(20px, 5vw, 72px);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #cdd1c8;
+  font-size: 13px;
+}
+
+.readout-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #d8af61;
+  box-shadow: 0 0 14px rgba(216, 175, 97, 0.7);
+}
+
+.controls {
+  left: 50%;
+  bottom: clamp(18px, 4vw, 42px);
+  width: min(620px, calc(100% - 32px));
+  min-height: 92px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 14px 18px;
+  border: 1px solid rgba(238, 233, 221, 0.16);
+  border-radius: 7px;
+  background: rgba(19, 23, 20, 0.82);
+  backdrop-filter: blur(12px);
+}
+
+.control-rows {
+  min-width: 0;
+  flex: 1;
+  display: grid;
+  gap: 10px;
+}
+
+.meter-control {
+  display: grid;
+  grid-template-columns: 38px minmax(90px, 1fr) 32px;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+}
+
+.sunlight-control input[type="range"] {
+  accent-color: #d9c76b;
+}
+
+.sunlight-control output {
+  color: #e0ce74;
+}
+
+input[type="range"] {
+  width: 100%;
+  height: 20px;
+  margin: 0;
+  accent-color: #d8af61;
+  cursor: pointer;
+}
+
+output {
+  color: #d8af61;
+  font-family: Consolas, monospace;
+  text-align: right;
+}
+
+.auto-control {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  white-space: nowrap;
+  color: #bfc4ba;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.auto-controls {
+  display: grid;
+  gap: 10px;
+}
+
+.reset-button {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid #60665e;
+  border-radius: 50%;
+  background: #292e29;
+  color: #d8af61;
+  font: 22px/1 Consolas, monospace;
+  cursor: pointer;
+}
+
+.reset-button:hover {
+  border-color: #a58143;
+  background: #373229;
+}
+
+.reset-button:focus-visible {
+  outline: 2px solid #eee9dd;
+  outline-offset: 3px;
+}
+
+.auto-control input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.switch {
+  position: relative;
+  width: 34px;
+  height: 18px;
+  border: 1px solid #60665e;
+  border-radius: 9px;
+  background: #292e29;
+  transition: background 160ms ease;
+}
+
+.switch::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #aeb3aa;
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.auto-control input:checked + .switch {
+  background: #5c4d2d;
+  border-color: #a58143;
+}
+
+.auto-control input:checked + .switch::after {
+  transform: translateX(16px);
+  background: #f0c774;
+}
+
+.auto-control input:focus-visible + .switch {
+  outline: 2px solid #eee9dd;
+  outline-offset: 3px;
+}
+
+@media (max-width: 560px) {
+  .sun-visual {
+    top: 116px;
+    right: 28px;
+    width: 48px;
+  }
+
+  .title-block p {
+    max-width: 210px;
+  }
+
+  .controls {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+
+  .auto-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 18px;
+  }
+
+  .auto-control {
+    justify-content: flex-end;
+  }
+}

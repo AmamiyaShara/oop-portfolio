@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>風囊生物草模</title>
+    <link rel="stylesheet" href="theme.css?v=19" />
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.min.js"></script>
+  </head>
+  <body>
+    <main id="stage" aria-label="風囊生物 3D 動態草模">
+      <header class="title-block">
+        <p>RESIDUAL CITY / ROOFTOP 01</p>
+        <h1>風囊生物</h1>
+      </header>
+
+      <section class="readout" aria-live="polite">
+        <span class="readout-dot"></span>
+        <span id="state-label">載入中</span>
+      </section>
+      <aside class="specimen" aria-label="個體觀察">
+        <label for="individual-select">觀察個體</label>
+        <select id="individual-select" aria-label="觀察個體"></select>
+        <span id="habitat-value">01 / 排風機</span>
+        <div class="view-modes" aria-label="視角">
+          <label><input type="radio" name="view" id="view-overview" checked /><span>全景</span></label>
+          <label><input type="radio" name="view" id="view-individual" /><span>個體</span></label>
+        </div>
+        <dl>
+          <div><dt>循環</dt><dd id="cycle-value">0 / 7</dd></div>
+          <div><dt>體型</dt><dd id="size-value">30%</dd></div>
+          <div><dt>日齡</dt><dd id="life-value">0/7 天</dd></div>
+          <div><dt>族群</dt><dd id="population-value">1</dd></div>
+        </dl>
+        <div class="phase-browser">
+          <label for="preview-stage">階段檢視</label>
+          <select id="preview-stage">
+            <option value="-1">即時模擬</option>
+            <option value="0">裂縫中的種子</option>
+            <option value="1">種子出土</option>
+            <option value="2">長出第一根鉤鎖</option>
+            <option value="3">自然風飄散</option>
+            <option value="4">勾住風口</option>
+            <option value="5">成熟期 · 長鉤鎖</option>
+            <option value="6">成熟期 · 長翅膀</option>
+            <option value="7">成熟期 · 等待第三夜結束</option>
+            <option value="8">成體 · 發芽</option>
+            <option value="9">成體 · 花苞</option>
+            <option value="10">成體 · 開花</option>
+            <option value="11">成體 · 夜間枯萎</option>
+            <option value="12">滿七天 · 繁殖散播</option>
+            <option value="13">完全凋謝</option>
+            <option value="14">落回裂縫</option>
+            <option value="15">本輪結束</option>
+          </select>
+          <div class="phase-options">
+            <label for="preview-cycle">循環
+              <select id="preview-cycle" disabled>
+                <option value="1">1 / 7</option><option value="2">2 / 7</option>
+                <option value="3">3 / 7</option><option value="4">4 / 7</option>
+                <option value="5">5 / 7</option><option value="6">6 / 7</option><option value="7">7 / 7</option>
+              </select>
+            </label>
+            <label for="preview-day">成體日
+              <select id="preview-day" disabled>
+                <option value="1">第 1 天</option><option value="2">第 2 天</option>
+                <option value="3">第 3 天</option><option value="4">第 4 天</option>
+                <option value="5">第 5 天</option><option value="6">第 6 天</option><option value="7">第 7 天</option>
+              </select>
+            </label>
+          </div>
+          <button id="resume-button" type="button" hidden>返回模擬</button>
+        </div>
+      </aside>
+
+      <section class="controls" aria-label="動態控制">
+        <div class="control-rows">
+          <label class="meter-control" for="wind-slider">
+            <span>風力</span>
+            <input id="wind-slider" type="range" min="0" max="100" value="0" />
+            <output id="wind-value" for="wind-slider">0</output>
+          </label>
+          <label class="meter-control sunlight-control" for="sunlight-slider">
+            <span>陽光</span>
+            <input id="sunlight-slider" type="range" min="0" max="100" value="0" />
+            <output id="sunlight-value" for="sunlight-slider">0</output>
+          </label>
+        </div>
+        <div class="auto-controls">
+          <label class="auto-control" for="auto-toggle">
+            <input id="auto-toggle" type="checkbox" checked />
+            <span class="switch" aria-hidden="true"></span>
+            <span>自動風力</span>
+          </label>
+          <label class="auto-control" for="auto-sun-toggle">
+            <input id="auto-sun-toggle" type="checkbox" />
+            <span class="switch" aria-hidden="true"></span>
+            <span>自動日照</span>
+          </label>
+          <button
+            id="reset-button"
+            class="reset-button"
+            type="button"
+            title="重新開始"
+            aria-label="重新開始生命循環"
+          >
+            &#8635;
+          </button>
+        </div>
+      </section>
+    </main>
+    <script src="sketch.js?v=19"></script>
+  </body>
+</html>
