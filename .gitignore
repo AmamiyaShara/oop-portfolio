@@ -3,3 +3,5 @@ node_modules/
 /.tools/
 /m2-species/.build/
 /m2-species/rust/target/
+/m3-creature/.build/
+/m3-creature/rust/target/
