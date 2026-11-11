@@ -29,7 +29,7 @@
 
 ## 執行方式
 
-從 repo 根目錄啟動靜態伺服器，再開啟 `/m3-creature/`。網頁會載入已編譯的 Rust WebAssembly，不必另外安裝 Rust。
+Windows 可直接雙擊 [`開啟作品.bat`](./開啟作品.bat)，啟動本機伺服器並開啟作品。也可以自行從 repo 根目錄啟動靜態伺服器，再開啟 `/m3-creature/`。網頁會載入已編譯的 Rust WebAssembly，不必另外安裝 Rust。
 
 ## 操作方式
 
